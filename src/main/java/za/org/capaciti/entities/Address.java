@@ -1,10 +1,10 @@
 package za.org.capaciti.entities;
 
 public class Address {
-        private String street;
-        private String city;
-        private String state;
-        private String zipCode;
+        private final String street;
+        private final String city;
+        private final String state;
+        private final String zipCode;
 
         public Address(String street, String city, String state, String zipCode) {
             this.street = street;

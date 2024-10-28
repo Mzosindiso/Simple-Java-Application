@@ -3,9 +3,9 @@ package za.org.capaciti.entities;
 public abstract class Person {
     protected String name;
     protected String id;
-    protected Address address;
+    protected String address;
 
-    public Person(String name, String id, Address address) {
+    public Person(String name, String id, String address) {
         this.name = name;
         this.id = id;
         this.address = address;

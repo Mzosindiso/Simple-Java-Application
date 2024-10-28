@@ -3,11 +3,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Customer extends Person {
-    private List<Account> accounts;
-    private List<Loan> loans;
+    private final List<Account> accounts;
+    private final List<Loan> loans;
 
     public Customer(String name, String id, Address address) {
-        super(name, id, address);
+        super(name, id, String.valueOf(address));
         this.accounts = new ArrayList<>();
         this.loans = new ArrayList<>();
     }
@@ -70,5 +70,9 @@ public class Customer extends Person {
 
     public void setAddress(Address newAddress) {
 
+    }
+
+    public Account[] getAccounts() {
+        return accounts.toArray(new Account[0]);
     }
 }

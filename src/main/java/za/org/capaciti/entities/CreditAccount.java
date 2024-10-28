@@ -1,9 +1,9 @@
 package za.org.capaciti.entities;
 
-public class CheckingAccount extends Account {
-    private double overdraftLimit;
+public class CreditAccount extends Account {
+    private final double overdraftLimit;
 
-    public CheckingAccount(String accountNumber, double initialBalance, double overdraftLimit) {
+    public CreditAccount(String accountNumber, double initialBalance, double overdraftLimit) {
         super(accountNumber, initialBalance);
         this.overdraftLimit = overdraftLimit;
     }
@@ -18,7 +18,7 @@ public class CheckingAccount extends Account {
     }
 
     @Override
-    public boolean withdraw(double amount) throws InsufficientFundsException, InvalidAmountException {
+    public void withdraw(double amount) throws InsufficientFundsException, InvalidAmountException {
         if (amount <= 0) {
             throw new InvalidAmountException("Withdrawal amount must be positive");
         }
@@ -27,7 +27,6 @@ public class CheckingAccount extends Account {
         }
         balance -= amount;
         System.out.println("Withdrawn R" + amount + " from checking account " + accountNumber);
-        return false;
     }
 
     @Override

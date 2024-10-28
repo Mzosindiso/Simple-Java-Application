@@ -1,10 +1,10 @@
 package za.org.capaciti.entities;
 
 public class Loan {
-    private String loanId;
-    private double amount;
-    private double interestRate;
-    private int term; // in months
+    private final String loanId;
+    private final double amount;
+    private final double interestRate;
+    private final int term; // in months
 
     public Loan(String loanId, double amount, double interestRate, int term) throws InvalidAmountException {
         if (amount <= 0 || interestRate <= 0 || term <= 0) {

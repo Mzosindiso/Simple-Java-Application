@@ -4,17 +4,16 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class BankAccountManagement {
-    private static List<Customer> customers = new ArrayList<>();
-    private static List<Employee> employees = new ArrayList<>();
-    private static Scanner scanner = new Scanner(System.in);
+    private static final List<Customer> customers = new ArrayList<>();
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        initializeSampleData();
 
         while (true) {
             displayMainMenu();
-            int choice = getUserChoice(1, 5);
+            int choice = getUserChoice(5);
 
             switch (choice) {
                 case 1:
@@ -30,17 +29,25 @@ public class BankAccountManagement {
                     displayAllInfo();
                     break;
                 case 5:
-                    System.out.println("Thank you for using the Bank Management System. Goodbye!");
+                    System.out.println("Thank you for using the Bank Account Management System. Goodbye!");
                     return;
             }
         }
     }
 
     private static void displayAllInfo() {
+        System.out.println("\n=== All Customers Information ===");
+        if (customers.isEmpty()) {
+            System.out.println("No customers found.");
+        } else {
+            for (Customer customer : customers) {
+                System.out.println(customer.getDetails());
+                System.out.println(customer.getAccountsAndLoans());
+                System.out.println("-----------------------------");
+            }
+        }
     }
 
-    private static void initializeSampleData() {
-    }
 
     private static void displayMainMenu() {
         System.out.println("\n=== Bank Management System ===");
@@ -52,15 +59,15 @@ public class BankAccountManagement {
         System.out.print("Enter your choice: ");
     }
 
-    private static int getUserChoice(int min, int max) {
+    private static int getUserChoice(int max) {
         int choice;
         while (true) {
             try {
                 choice = Integer.parseInt(scanner.nextLine());
-                if (choice >= min && choice <= max) {
+                if (choice >= 1 && choice <= max) {
                     return choice;
                 } else {
-                    System.out.print("Invalid choice. Please enter a number between " + min + " and " + max + ": ");
+                    System.out.print("Invalid choice. Please enter a number between " + 1 + " and " + max + ": ");
                 }
             } catch (NumberFormatException e) {
                 System.out.print("Invalid input. Please enter a number: ");
@@ -77,7 +84,7 @@ public class BankAccountManagement {
             System.out.println("4. Return to Main Menu");
             System.out.print("Enter your choice: ");
 
-            int choice = getUserChoice(1, 4);
+            int choice = getUserChoice(4);
 
             switch (choice) {
                 case 1:
@@ -152,10 +159,12 @@ public class BankAccountManagement {
         }
     }
 
-    private static Customer findCustomerById(String id) {
+    private static Account findAccountByNumber(String accountNumber) {
         for (Customer customer : customers) {
-            if (customer.getId().equals(id)) {
-                return customer;
+            for (Account account : customer.getAccounts()) {
+                if (account.getAccountNumber().equals(accountNumber)) {
+                    return account;
+                }
             }
         }
         return null;
@@ -171,7 +180,7 @@ public class BankAccountManagement {
             System.out.println("5. Return to Main Menu");
             System.out.print("Enter your choice: ");
 
-            int choice = getUserChoice(1, 5);
+            int choice = getUserChoice(5);
 
             switch (choice) {
                 case 1:
@@ -203,8 +212,8 @@ public class BankAccountManagement {
 
         System.out.println("Select account type:");
         System.out.println("1. Savings Account");
-        System.out.println("2. Checking Account");
-        int accountType = getUserChoice(1, 2);
+        System.out.println("2. Credit Account");
+        int accountType = getUserChoice(2);
 
         System.out.print("Enter initial balance: ");
         double initialBalance = getPositiveDouble();
@@ -219,7 +228,7 @@ public class BankAccountManagement {
         } else {
             System.out.print("Enter overdraft limit: ");
             double overdraftLimit = getPositiveDouble();
-            newAccount = new CheckingAccount(accountNumber, initialBalance, overdraftLimit);
+            newAccount = new CreditAccount(accountNumber, initialBalance, overdraftLimit);
         }
 
         customer.addAccount(newAccount);
@@ -242,14 +251,15 @@ public class BankAccountManagement {
 
         try {
             account.deposit(amount);
-            System.out.println("Deposit successful. New balance: $" + account.getBalance());
+            System.out.println("Deposit successful. \n ===================== " +
+                    "\n New balance: R" + account.getBalance() + "\n =====================");
         } catch (InvalidAmountException e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
 
     private static double getPositiveDouble() {
-        return 0;
+        return scanner.nextDouble();
     }
 
 
@@ -268,15 +278,13 @@ public class BankAccountManagement {
 
         try {
             account.withdraw(amount);
-            System.out.println("Withdrawal successful. New balance: $" + account.getBalance());
+            System.out.println("Withdrawal successful.\n ===================== \n" +
+                    " New balance: R" + account.getBalance() + "\n =====================");
         } catch (InsufficientFundsException | InvalidAmountException e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
 
-    private static Account findAccountByNumber(String accountNumber) {
-        return null;
-    }
 
     private static void viewAccountBalance() {
         System.out.print("Enter account number: ");
@@ -297,7 +305,7 @@ public class BankAccountManagement {
             System.out.println("3. Return to Main Menu");
             System.out.print("Enter your choice: ");
 
-            int choice = getUserChoice(1, 3);
+            int choice = getUserChoice(3);
 
             switch (choice) {
                 case 1:
@@ -333,14 +341,23 @@ public class BankAccountManagement {
             Loan newLoan = new Loan(loanId, amount, interestRate, term);
             customer.addLoan(newLoan);
             System.out.println("Loan application successful! Loan ID: " + loanId);
-            System.out.println("Monthly payment: $" + String.format("%.2f", newLoan.calculateMonthlyPayment()));
+            System.out.println("Monthly payment: R" + String.format("%.2f", newLoan.calculateMonthlyPayment()));
         } catch (InvalidAmountException e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
 
+    private static Customer findCustomerById(String customerId) {
+        for (Customer customer : customers) {
+            if (customer.getId().equals(customerId)) {
+                return customer;
+            }
+        }
+        return null;
+    }
+
     private static int getPositiveInt() {
-        return 0;
+        return scanner.nextInt();
     }
 
     private static void viewLoanDetails() {
@@ -358,8 +375,9 @@ public class BankAccountManagement {
         } else {
             for (Loan loan : loans) {
                 System.out.println(loan.getLoanInfo());
-                System.out.println("Monthly payment: $" + String.format("%.2f", loan.calculateMonthlyPayment()));
+                System.out.println("Monthly payment: R" + String.format("%.2f", loan.calculateMonthlyPayment()));
             }
         }
     }
+
 }

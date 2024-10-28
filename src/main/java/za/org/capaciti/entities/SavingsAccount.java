@@ -1,7 +1,7 @@
 package za.org.capaciti.entities;
 
 public class SavingsAccount extends Account {
-    private double interestRate;
+    private final double interestRate;
 
     public SavingsAccount(String accountNumber, double initialBalance, double interestRate) {
         super(accountNumber, initialBalance);
@@ -18,7 +18,7 @@ public class SavingsAccount extends Account {
     }
 
     @Override
-    public boolean withdraw(double amount) throws InsufficientFundsException, InvalidAmountException {
+    public void withdraw(double amount) throws InsufficientFundsException, InvalidAmountException {
         if (amount <= 0) {
             throw new InvalidAmountException("Withdrawal amount must be positive");
         }
@@ -27,7 +27,6 @@ public class SavingsAccount extends Account {
         }
         balance -= amount;
         System.out.println("Withdrawn R" + amount + " from savings account " + accountNumber);
-        return false;
     }
 
     @Override

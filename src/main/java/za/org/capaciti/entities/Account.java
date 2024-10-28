@@ -10,10 +10,14 @@ public abstract class Account {
     }
 
     public abstract void deposit(double amount) throws InvalidAmountException;
-    public abstract boolean withdraw(double amount) throws InsufficientFundsException, InvalidAmountException;
+    public abstract void withdraw(double amount) throws InsufficientFundsException, InvalidAmountException;
     public abstract String getAccountInfo();
 
     public double getBalance() {
         return balance;
+    }
+
+    public Object getAccountNumber() {
+        return accountNumber;
     }
 }
