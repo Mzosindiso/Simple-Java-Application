@@ -1,54 +1,74 @@
 package za.org.capaciti.entities;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Customer {
-    private String first_name;
-    private String last_name;
-    private String email;
-    private String phone;
+public class Customer extends Person {
+    private List<Account> accounts;
+    private List<Loan> loans;
 
-    private Customer(){
-
+    public Customer(String name, String id, Address address) {
+        super(name, id, address);
+        this.accounts = new ArrayList<>();
+        this.loans = new ArrayList<>();
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public void addAccount(Account account) {
+        accounts.add(account);
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void addLoan(Loan loan) {
+        loans.add(loan);
     }
 
     @Override
     public String toString() {
         return "Customer{" +
-                "first_name='" + first_name + '\'' +
-                ", last_name='" + last_name + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
+                "accounts=" + accounts +
+                ", loans=" + loans +
+                ", name='" + name + '\'' +
+                ", id='" + id + '\'' +
+                ", address=" + address +
                 '}';
+    }
+
+    @Override
+    public String getDetails() {
+        return "Customer ID: " + getId() + "\n" +
+                "Name: " + getName() + "\n" +
+                "Address: " + getAddress().toString();
+    }
+
+    private Object getAddress() {
+        return address;
+    }
+
+    String getId() {
+        return id;
+    }
+
+    private String getName() {
+        return name;
+    }
+
+
+    public String getAccountsAndLoans() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Accounts:\n");
+        for (Account account : accounts) {
+            sb.append("- ").append(account.getAccountInfo()).append("\n");
+        }
+        sb.append("Loans:\n");
+        for (Loan loan : loans) {
+            sb.append("- ").append(loan.getLoanInfo()).append("\n");
+        }
+        return sb.toString();
+    }
+
+    public List<Loan> getLoans() {
+        return List.of();
+    }
+
+    public void setAddress(Address newAddress) {
+
     }
 }
