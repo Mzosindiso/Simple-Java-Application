@@ -28,7 +28,6 @@ The project is organized into the following main components:
 - `entities` package: Contains all the entity classes representing different objects in the system.
     - `Person.java`: Base class for Customer and Employee.
     - `Customer.java`: Represents a bank customer.
-    - `Employee.java`: Represents a bank employee.
     - `Account.java`: Represents a bank account.
     - `Loan.java`: Represents a loan.
     - `Address.java`: Represents an address.
