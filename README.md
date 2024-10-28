@@ -17,7 +17,6 @@ The main purposes of this project are:
 - Customer Management: Add, view, and update customer information.
 - Account Management: Create and manage different types of bank accounts.
 - Loan Management: Process and track loans for customers.
-- Employee Management: Manage bank employee information.
 - Exception Handling: Custom exceptions for invalid operations.
 
 ## Project Structure
