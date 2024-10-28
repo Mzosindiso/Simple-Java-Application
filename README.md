@@ -25,7 +25,7 @@ The project is organized into the following main components:
 
 - `BankAccountManagement.java`: The main class that runs the application and handles user interactions.
 - `entities` package: Contains all the entity classes representing different objects in the system.
-    - `Person.java`: Base class for Customer and Employee.
+    - `Person.java`: Base class for Customer.
     - `Customer.java`: Represents a bank customer.
     - `Account.java`: Represents a bank account.
     - `Loan.java`: Represents a loan.
