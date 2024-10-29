@@ -17,7 +17,6 @@ The main purposes of this project are:
 - Customer Management: Add, view, and update customer information.
 - Account Management: Create and manage different types of bank accounts.
 - Loan Management: Process and track loans for customers.
-- Employee Management: Manage bank employee information.
 - Exception Handling: Custom exceptions for invalid operations.
 
 ## Project Structure
@@ -26,9 +25,8 @@ The project is organized into the following main components:
 
 - `BankAccountManagement.java`: The main class that runs the application and handles user interactions.
 - `entities` package: Contains all the entity classes representing different objects in the system.
-    - `Person.java`: Base class for Customer and Employee.
+    - `Person.java`: Base class for Customer.
     - `Customer.java`: Represents a bank customer.
-    - `Employee.java`: Represents a bank employee.
     - `Account.java`: Represents a bank account.
     - `Loan.java`: Represents a loan.
     - `Address.java`: Represents an address.
