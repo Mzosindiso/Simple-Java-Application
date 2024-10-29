@@ -69,7 +69,7 @@ public class Customer extends Person {
     }
 
     public void setAddress(Address newAddress) {
-
+        this.address = String.valueOf(newAddress);
     }
 
     public Account[] getAccounts() {

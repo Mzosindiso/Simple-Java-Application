@@ -31,6 +31,6 @@ public class CreditAccount extends Account {
 
     @Override
     public String getAccountInfo() {
-        return "Checking Account: " + accountNumber + ", Balance: R" + balance + ", Overdraft Limit: R" + overdraftLimit;
+        return "Credit Account: " + accountNumber + ", Balance: R" + balance + ", Overdraft Limit: R" + overdraftLimit;
     }
 }
