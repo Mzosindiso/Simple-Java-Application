@@ -42,7 +42,7 @@ public class Customer extends Person {
         return address;
     }
 
-    String getId() {
+    public String getId() {
         return id;
     }
 

@@ -24,4 +24,28 @@ public class Loan {
         double monthlyRate = interestRate / 12;
         return (amount * monthlyRate * Math.pow(1 + monthlyRate, term)) / (Math.pow(1 + monthlyRate, term) - 1);
     }
+
+    public void setApproved(boolean b) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setApproved'");
+    }
+
+    public void makePayment(double paymentAmount) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'makePayment'");
+    }
+
+    public boolean isApproved() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'isApproved'");
+    }
+
+    public Object getRemainingBalance() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getRemainingBalance'");
+    }
+
+    public Object getLoanId() {
+        return null;
+    }
 }

@@ -35,7 +35,7 @@ public class BankAccountManagement {
         }
     }
 
-    private static void displayAllInfo() {
+    public static void displayAllInfo() {
         System.out.println("\n=== All Customers Information ===");
         if (customers.isEmpty()) {
             System.out.println("No customers found.");
