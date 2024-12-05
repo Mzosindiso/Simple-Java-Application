@@ -3,24 +3,65 @@ package za.org.capaciti;
 import za.org.capaciti.entities.*;
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 public class BankAccountManagementGUI extends JFrame {
     private static final List<Customer> customers = new ArrayList<>();
     private JTextArea outputArea;
 
+    // Custom color scheme
+    private static final Color PRIMARY_COLOR = new Color(146, 0, 0);  // Dark blue
+    private static final Color SECONDARY_COLOR = new Color(255, 215, 0);  // Gold
+    private static final Color BACKGROUND_COLOR = new Color(240, 248, 255);  // Light blue
+    private static final Color TEXT_COLOR = new Color(33, 33, 33);  // Dark gray
+
     public BankAccountManagementGUI() {
         setTitle("Bank Account Management System");
-        setSize(800, 600);
+        setSize(900, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new BorderLayout());
+        setLayout(new BorderLayout(10, 10));
+        getContentPane().setBackground(BACKGROUND_COLOR);
+
+        JLabel logoLabel;
+        try {
+            ImageIcon logoIcon = new ImageIcon(getClass().getResource("/OIP.jpg"));
+            if (logoIcon.getImageLoadStatus() == MediaTracker.COMPLETE) {
+                Image scaledLogo = logoIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                logoLabel = new JLabel(new ImageIcon(scaledLogo));
+            } else {
+                throw new Exception("Image not found");
+            }
+        } catch (Exception e) {
+            // Fallback to text if image is not found
+            logoLabel = new JLabel("Bank Logo");
+            logoLabel.setFont(new Font("Arial", Font.BOLD, 18));
+            logoLabel.setForeground(Color.WHITE);
+        }
+        logoLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+    
+        JPanel topPanel = new JPanel(new BorderLayout());
+        topPanel.setBackground(PRIMARY_COLOR);
+        topPanel.add(logoLabel, BorderLayout.WEST);
+    
+    
+
+        JLabel titleLabel = new JLabel("Bank Account Management System");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        topPanel.add(titleLabel, BorderLayout.CENTER);
+
+        add(topPanel, BorderLayout.NORTH);
 
         JPanel buttonPanel = createButtonPanel();
         outputArea = new JTextArea();
         outputArea.setEditable(false);
         outputArea.setFont(new Font("Arial", Font.PLAIN, 14));
+        outputArea.setForeground(TEXT_COLOR);
+        outputArea.setBackground(Color.WHITE);
         JScrollPane scrollPane = new JScrollPane(outputArea);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         add(buttonPanel, BorderLayout.WEST);
         add(scrollPane, BorderLayout.CENTER);
@@ -31,6 +72,7 @@ public class BankAccountManagementGUI extends JFrame {
     private JPanel createButtonPanel() {
         JPanel buttonPanel = new JPanel(new GridLayout(5, 1, 10, 10));
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        buttonPanel.setBackground(BACKGROUND_COLOR);
 
         String[] buttonLabels = {"Manage Customers", "Manage Accounts", "Manage Loans", "Display All Information", "Exit"};
         for (String label : buttonLabels) {
@@ -45,9 +87,9 @@ public class BankAccountManagementGUI extends JFrame {
         JButton button = new JButton(text);
         button.setFont(new Font("Arial", Font.BOLD, 14));
         button.setFocusPainted(false);
-        button.setBackground(new Color(70, 130, 180));
-        button.setForeground(Color.WHITE);
-        button.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));
+        button.setBackground(SECONDARY_COLOR);
+        button.setForeground(PRIMARY_COLOR);
+        button.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         button.addActionListener(e -> {
@@ -72,7 +114,6 @@ public class BankAccountManagementGUI extends JFrame {
 
         return button;
     }
-
     private void manageCustomers() {
         JDialog dialog = new JDialog(this, "Manage Customers", true);
         dialog.setLayout(new GridLayout(4, 1, 10, 10));
