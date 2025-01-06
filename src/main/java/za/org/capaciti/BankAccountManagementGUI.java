@@ -13,7 +13,7 @@ public class BankAccountManagementGUI extends JFrame {
     // Custom color scheme
     private static final Color PRIMARY_COLOR = new Color(146, 0, 0);  // Dark blue
     private static final Color SECONDARY_COLOR = new Color(255, 215, 0);  // Gold
-    private static final Color BACKGROUND_COLOR = new Color(240, 248, 255);  // Light blue
+    private static final Color BACKGROUND_COLOR = new Color(251, 253, 255);  // Light blue
     private static final Color TEXT_COLOR = new Color(33, 33, 33);  // Dark gray
 
     public BankAccountManagementGUI() {
@@ -33,7 +33,7 @@ public class BankAccountManagementGUI extends JFrame {
                 throw new Exception("Image not found");
             }
         } catch (Exception e) {
-            // Fallback to text if image is not found
+            //If image is not found in resources, this is a fallback to text
             logoLabel = new JLabel("Bank Logo");
             logoLabel.setFont(new Font("Arial", Font.BOLD, 18));
             logoLabel.setForeground(Color.WHITE);
@@ -85,7 +85,7 @@ public class BankAccountManagementGUI extends JFrame {
 
     private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
-        button.setFont(new Font("Arial", Font.BOLD, 14));
+        button.setFont(new Font("Arial", Font.BOLD, 15));
         button.setFocusPainted(false);
         button.setBackground(SECONDARY_COLOR);
         button.setForeground(PRIMARY_COLOR);
@@ -178,51 +178,48 @@ public class BankAccountManagementGUI extends JFrame {
     }
 
     private void manageLoans() {
-        while (true) {
-            JDialog dialog = new JDialog(this, "Loan Management", true);
-            dialog.setLayout(new GridLayout(5, 1, 10, 10));
-            dialog.setSize(300, 250);
+        JDialog dialog = new JDialog(this, "Loan Management", true);
+        dialog.setLayout(new GridLayout(5, 1, 10, 10));
+        dialog.setSize(300, 250);
     
-            JButton applyButton = createStyledButton("Apply for Loan");
-            JButton approveButton = createStyledButton("Approve Loan");
-            JButton disapproveButton = createStyledButton("Disapprove Loan");
-            JButton paymentButton = createStyledButton("Make Loan Payment");
-            JButton backButton = createStyledButton("Back to Main Menu");
+        JButton applyButton = createStyledButton("Apply for Loan");
+        JButton approveButton = createStyledButton("Approve Loan");
+        JButton disapproveButton = createStyledButton("Disapprove Loan");
+        JButton paymentButton = createStyledButton("Make Loan Payment");
+        JButton backButton = createStyledButton("Back to Main Menu");
     
-            applyButton.addActionListener(e -> {
-                dialog.dispose();
-                applyForLoan();
-            });
+        applyButton.addActionListener(e -> {
+            dialog.dispose();
+            applyForLoan();
+        });
     
-            approveButton.addActionListener(e -> {
-                dialog.dispose();
-                approveLoan();
-            });
+        approveButton.addActionListener(e -> {
+            dialog.dispose();
+            approveLoan();
+        });
     
-            disapproveButton.addActionListener(e -> {
-                dialog.dispose();
-                disapproveLoan();
-            });
+        disapproveButton.addActionListener(e -> {
+            dialog.dispose();
+            disapproveLoan();
+        });
     
-            paymentButton.addActionListener(e -> {
-                dialog.dispose();
-                makeLoanPayment();
-            });
+        paymentButton.addActionListener(e -> {
+            dialog.dispose();
+            makeLoanPayment();
+        });
     
-            backButton.addActionListener(e -> {
-                dialog.dispose();
-                return;
-            });
+        backButton.addActionListener(e -> {
+            dialog.dispose();
+        });
     
-            dialog.add(applyButton);
-            dialog.add(approveButton);
-            dialog.add(disapproveButton);
-            dialog.add(paymentButton);
-            dialog.add(backButton);
+        dialog.add(applyButton);
+        dialog.add(approveButton);
+        dialog.add(disapproveButton);
+        dialog.add(paymentButton);
+        dialog.add(backButton);
     
-            dialog.setLocationRelativeTo(this);
-            dialog.setVisible(true);
-        }
+        dialog.setLocationRelativeTo(this);
+        dialog.setVisible(true);
     }
     private void displayAllInfo() {
         StringBuilder info = new StringBuilder();
