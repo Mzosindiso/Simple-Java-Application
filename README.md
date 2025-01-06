@@ -4,6 +4,8 @@
 
 This Java application is a simple Bank Account Management System designed to demonstrate object-oriented programming principles and basic banking operations. It's developed as part of a learning exercise for Java programming and software design concepts.
 
+![image](https://github.com/user-attachments/assets/8743b7be-15e5-40a9-b9c7-c48114ac4e57)
+
 ## Purpose
 
 The main purposes of this project are:
